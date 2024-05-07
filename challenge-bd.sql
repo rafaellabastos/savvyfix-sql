@@ -18,7 +18,7 @@ create table Cliente (
     nm_clie varchar(50) not null,
     cpf_clie char(11) unique not null,
     senha_clie varchar(50) not null,
-    cep_endereco char(8) 
+    id_endereco char(3) 
 );
 
 create table Compra (
@@ -27,14 +27,15 @@ create table Compra (
     qntd_prod number(3) not null,
     valor_compra number(8,2) not null,
     especificacao_prod varchar(30) not null,
-    cep_endereco char(8), 
+    id_endereco char(3), 
     preco_variado number(8,2), 
     id_cliente char(3), 
     id_prod char(3) 
 );
 
 create table Endereco (
-    cep_endereco char(8) primary key,
+    id_endereco char(3) primary key,
+    cep_endereco char(8) not null,
     rua_endereco varchar(50) not null,
     num_endereco varchar(20) not null,
     bairro_endereco varchar(50) not null,
@@ -51,7 +52,7 @@ create table Atividades (
     qntd_procura number(10) not null,
     demanda_produto char(2) not null,
     id_cliente char(3),
-    cep_endereco char(8) 
+    id_endereco char(3) 
 );
 
 create table Produto (
@@ -65,10 +66,10 @@ create table Produto (
 
 ---Inserção das chaves estrangeiras
 alter table Cliente
-add foreign key (cep_endereco) references Endereco(cep_endereco);
+add foreign key (id_endereco) references Endereco(id_endereco);
 
 alter table Compra
-add foreign key (cep_endereco) references Endereco(cep_endereco);
+add foreign key (id_endereco) references Endereco(id_endereco);
 
 alter table Compra
 add foreign key (id_cliente) references Cliente(id_cliente);
@@ -83,29 +84,29 @@ alter table Atividades
 add foreign key (id_cliente) references Cliente(id_cliente);
 
 alter table Atividades
-add foreign key (cep_endereco) references Endereco(cep_endereco);
+add foreign key (id_endereco) references Endereco(id_endereco);
 
 alter table Produto
 add foreign key (preco_variado) references Atividades(preco_variado);
 
 ---Inserção de dados nas tabelas
-insert into Endereco (cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (49065220, 'Rua Conego Serapiao Machado', 5, 'Bairro industrial', 'Aracaju', 'SE', 'Bra');
-insert into Endereco (cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (45208190, 'Rua acampamento velho', 10, 'Bairro Jequiezinho', 'Jequie', 'BA', 'Bra');
-insert into Endereco (cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (77064114, 'Rua SF', 15, 'Bairro Setor Santa Fé', 'Palmas', 'TO', 'Bra');
-insert into Endereco (cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (79841510, 'Rua Venezuela', 20, 'Parque das Nações', 'Dourado', 'MS', 'Bra');
-insert into Endereco (cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (58068183, 'Rua José Pereira de Lima Filho', 25, 'Bairro Gramame', 'Joao Pessoa', 'PB', 'BRA');
+insert into Endereco (id_endereco, cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (811, 49065220, 'Rua Conego Serapiao Machado', 5, 'Bairro industrial', 'Aracaju', 'SE', 'Bra');
+insert into Endereco (id_endereco, cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (734, 45208190, 'Rua acampamento velho', 10, 'Bairro Jequiezinho', 'Jequie', 'BA', 'Bra');
+insert into Endereco (id_endereco, cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (764, 77064114, 'Rua SF', 15, 'Bairro Setor Santa Fé', 'Palmas', 'TO', 'Bra');
+insert into Endereco (id_endereco, cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (116, 79841510, 'Rua Venezuela', 20, 'Parque das Nações', 'Dourado', 'MS', 'Bra');
+insert into Endereco (id_endereco, cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (344, 58068183, 'Rua José Pereira de Lima Filho', 25, 'Bairro Gramame', 'Joao Pessoa', 'PB', 'BRA');
 
-insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, cep_endereco) values (877, 'Lorenzo Giovanni Calebe Ferreira', 26019118088, 'MPRFuQYLWSfN0iU', 49065220);
-insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, cep_endereco) values (136, 'Eduardo Bruno Leandro Gonçalves', 84214739051, 'L6WneERuzRiEtko', 45208190);
-insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, cep_endereco) values (144, 'Matheus Luan Fogaça', 55533248072, 'RMEzoAw3OlOgDri', 77064114);
-insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, cep_endereco) values (642, 'Pedro Henrique Márcio Costa', 28175653043, 's8histwMgcK7TLA', 79841510);
-insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, cep_endereco) values (993, 'Benedita Simone Melissa da Cunha', 42869783035, '6hYQnI0A7dBmJO8', 58068183);
+insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, id_endereco) values (877, 'Lorenzo Giovanni Calebe Ferreira', 26019118088, 'MPRFuQYLWSfN0iU', 811);
+insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, id_endereco) values (136, 'Eduardo Bruno Leandro Gonçalves', 84214739051, 'L6WneERuzRiEtko', 734);
+insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, id_endereco) values (144, 'Matheus Luan Fogaça', 55533248072, 'RMEzoAw3OlOgDri', 764);
+insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, id_endereco) values (642, 'Pedro Henrique Márcio Costa', 28175653043, 's8histwMgcK7TLA', 116);
+insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, id_endereco) values (993, 'Benedita Simone Melissa da Cunha', 42869783035, '6hYQnI0A7dBmJO8', 344);
 
-insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, cep_endereco) values (132.58, to_date('10:31:57','HH24:MI:SS'), 'Bairro Industrial', 'Frio', 2, 'Ba', 877, 49065220);
-insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, cep_endereco) values (174.60, to_date('15:49:26','HH24:MI:SS'), 'Bairro Santos Dumont', 'Calor', 3, 'Ba', 136, 45208190);
-insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, cep_endereco) values (303.99, to_date('05:43:49','HH24:MI:SS'), 'Bairro Santo Meu', 'Ameno', 22, 'Al', 144, 77064114);
-insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, cep_endereco) values (467.54, to_date('08:41:53','HH24:MI:SS'), 'Parque Pinheiros', 'Chuva', 10, 'Me', 642, 79841510);
-insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, cep_endereco) values (458.97, to_date('09:29:48','HH24:MI:SS'), 'Jardim das Margaridas', 'Calor', 11,'Me', 993, 58068183);
+insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (132.58, to_date('10:31:57','HH24:MI:SS'), 'Bairro Industrial', 'Frio', 2, 'Ba', 877, 811);
+insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (174.60, to_date('15:49:26','HH24:MI:SS'), 'Bairro Santos Dumont', 'Calor', 3, 'Ba', 136, 734);
+insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (303.99, to_date('05:43:49','HH24:MI:SS'), 'Bairro Santo Meu', 'Ameno', 22, 'Al', 144, 764);
+insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (467.54, to_date('08:41:53','HH24:MI:SS'), 'Parque Pinheiros', 'Chuva', 10, 'Me', 642, 116);
+insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (458.97, to_date('09:29:48','HH24:MI:SS'), 'Jardim das Margaridas', 'Calor', 11,'Me', 993, 344);
 
 insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, preco_variado) values (625, 'Tenis Casual', 'Para ser utilizado em diversas situações', 'Kolosh', 139.99, 132.58);
 insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, preco_variado) values (830, 'Tenis Cano Alto', 'Para ser utilizado em diversas situações', 'AllStar', 269.90, 174.60);
@@ -113,11 +114,11 @@ insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, preco_
 insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, preco_variado) values (182, 'Tenis Plataforma', 'Para deixar a pessoa mais alta', 'Puma', 450.99, 467.54);
 insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, preco_variado) values (644, 'Tenis Chunky Sneakers', 'Para ser diferente', 'Adidas', 479.99, 458.97);
 
-insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, cep_endereco, preco_variado, id_cliente, id_prod) values (862, 'Tenis Casual', 3, 397.74, 'Tamanho 37, 38 e 39', 49065220, 132.58, 877, 625);
-insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, cep_endereco, preco_variado, id_cliente, id_prod) values (598, 'Tenis Cano Alto', 4, 698.40, 'Todos tamanho 34', 45208190, 174.60, 136, 830);
-insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, cep_endereco, preco_variado, id_cliente, id_prod) values (187, 'Tenis Esportivo', 1, 303.99, 'Tamanho 35',77064114, 303.99, 144, 953);
-insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, cep_endereco, preco_variado, id_cliente, id_prod) values (216, 'Tenis Plataforma', 7, 322.78, 'Tam 34, 35, 37, 37, 38, 39, 40', 79841510, 467.54, 642, 182);
-insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, cep_endereco, preco_variado, id_cliente, id_prod) values (560, 'Tenis Chunky Sneakers', 1, 458.97, 'Tamanho 36', 58068183, 458.97, 993, 644);
+insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, preco_variado, id_cliente, id_prod) values (862, 'Tenis Casual', 3, 397.74, 'Tamanho 37, 38 e 39', 811, 132.58, 877, 625);
+insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, preco_variado, id_cliente, id_prod) values (598, 'Tenis Cano Alto', 4, 698.40, 'Todos tamanho 34', 734, 174.60, 136, 830);
+insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, preco_variado, id_cliente, id_prod) values (187, 'Tenis Esportivo', 1, 303.99, 'Tamanho 35',764, 303.99, 144, 953);
+insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, preco_variado, id_cliente, id_prod) values (216, 'Tenis Plataforma', 7, 322.78, 'Tam 34, 35, 37, 37, 38, 39, 40', 116, 467.54, 642, 182);
+insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, preco_variado, id_cliente, id_prod) values (560, 'Tenis Chunky Sneakers', 1, 458.97, 'Tamanho 36', 344, 458.97, 993, 644);
 
 --- Primeiro bloco anônimo
 set serveroutput on
