@@ -103,23 +103,23 @@ insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, id_endereco) val
 insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, id_endereco) values (642, 'Pedro Henrique Márcio Costa', 28175653043, 's8histwMgcK7TLA', 116);
 insert into Cliente (id_cliente, nm_clie, cpf_clie, senha_clie, id_endereco) values (993, 'Benedita Simone Melissa da Cunha', 42869783035, '6hYQnI0A7dBmJO8', 344);
 
-insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (132.58, to_date('10:31:57','HH24:MI:SS'), 'Bairro Industrial', 'Frio', 2, 'Ba', 877, 811);
-insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (174.60, to_date('15:49:26','HH24:MI:SS'), 'Bairro Santos Dumont', 'Calor', 3, 'Ba', 136, 734);
-insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (303.99, to_date('05:43:49','HH24:MI:SS'), 'Bairro Santo Meu', 'Ameno', 22, 'Al', 144, 764);
-insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (467.54, to_date('08:41:53','HH24:MI:SS'), 'Parque Pinheiros', 'Chuva', 10, 'Me', 642, 116);
-insert into Atividades (preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (458.97, to_date('09:29:48','HH24:MI:SS'), 'Jardim das Margaridas', 'Calor', 11,'Me', 993, 344);
+insert into Atividades (id_atividades, preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (435, 132.58, to_date('10:31:57','HH24:MI:SS'), 'Bairro Industrial', 'Frio', 2, 'Ba', 877, 811);
+insert into Atividades (id_atividades, preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (493, 174.60, to_date('15:49:26','HH24:MI:SS'), 'Bairro Santos Dumont', 'Calor', 3, 'Ba', 136, 734);
+insert into Atividades (id_atividades, preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (807, 303.99, to_date('05:43:49','HH24:MI:SS'), 'Bairro Santo Meu', 'Ameno', 22, 'Al', 144, 764);
+insert into Atividades (id_atividades, preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (932, 467.54, to_date('08:41:53','HH24:MI:SS'), 'Parque Pinheiros', 'Chuva', 10, 'Me', 642, 116);
+insert into Atividades (id_atividades, preco_variado, horario_atual, localizacao_atual, clima_atual, qntd_procura, demanda_produto, id_cliente, id_endereco) values (108, 458.97, to_date('09:29:48','HH24:MI:SS'), 'Jardim das Margaridas', 'Calor', 11,'Me', 993, 344);
 
-insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, preco_variado) values (625, 'Tenis Casual', 'Para ser utilizado em diversas situações', 'Kolosh', 139.99, 132.58);
-insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, preco_variado) values (830, 'Tenis Cano Alto', 'Para ser utilizado em diversas situações', 'AllStar', 269.90, 174.60);
-insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, preco_variado) values (953, 'Tenis Esportivo', 'Para praticar esportes', 'Nike', 250.99, 303.99);
-insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, preco_variado) values (182, 'Tenis Plataforma', 'Para deixar a pessoa mais alta', 'Puma', 450.99, 467.54);
-insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, preco_variado) values (644, 'Tenis Chunky Sneakers', 'Para ser diferente', 'Adidas', 479.99, 458.97);
+insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, id_atividades) values (625, 'Tenis Casual', 'Para ser utilizado em diversas situações', 'Kolosh', 139.99, 435);
+insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, id_atividades) values (830, 'Tenis Cano Alto', 'Para ser utilizado em diversas situações', 'AllStar', 269.90, 493);
+insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, id_atividades) values (953, 'Tenis Esportivo', 'Para praticar esportes', 'Nike', 250.99, 807);
+insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, id_atividades) values (182, 'Tenis Plataforma', 'Para deixar a pessoa mais alta', 'Puma', 450.99, 932);
+insert into Produto (id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, id_atividades) values (644, 'Tenis Chunky Sneakers', 'Para ser diferente', 'Adidas', 479.99, 108);
 
-insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, preco_variado, id_cliente, id_prod) values (862, 'Tenis Casual', 3, 397.74, 'Tamanho 37, 38 e 39', 811, 132.58, 877, 625);
-insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, preco_variado, id_cliente, id_prod) values (598, 'Tenis Cano Alto', 4, 698.40, 'Todos tamanho 34', 734, 174.60, 136, 830);
-insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, preco_variado, id_cliente, id_prod) values (187, 'Tenis Esportivo', 1, 303.99, 'Tamanho 35',764, 303.99, 144, 953);
-insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, preco_variado, id_cliente, id_prod) values (216, 'Tenis Plataforma', 7, 322.78, 'Tam 34, 35, 37, 37, 38, 39, 40', 116, 467.54, 642, 182);
-insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, preco_variado, id_cliente, id_prod) values (560, 'Tenis Chunky Sneakers', 1, 458.97, 'Tamanho 36', 344, 458.97, 993, 644);
+insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, id_atividades, id_cliente, id_prod) values (862, 'Tenis Casual', 3, 397.74, 'Tamanho 37, 38 e 39', 811, 435, 877, 625);
+insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, id_atividades, id_cliente, id_prod) values (598, 'Tenis Cano Alto', 4, 698.40, 'Todos tamanho 34', 734, 493, 136, 830);
+insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, id_atividades, id_cliente, id_prod) values (187, 'Tenis Esportivo', 1, 303.99, 'Tamanho 35',764, 807, 144, 953);
+insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, id_atividades, id_cliente, id_prod) values (216, 'Tenis Plataforma', 7, 322.78, 'Tam 34, 35, 37, 37, 38, 39, 40', 116, 932, 642, 182);
+insert into Compra (id_compra, nm_prod, qntd_prod, valor_compra, especificacao_prod, id_endereco, id_atividades, id_cliente, id_prod) values (560, 'Tenis Chunky Sneakers', 1, 458.97, 'Tamanho 36', 344, 108, 993, 644);
 
 --- Primeiro bloco anônimo
 set serveroutput on
