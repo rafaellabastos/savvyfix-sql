@@ -79,7 +79,7 @@ alter table Compra
 add foreign key (id_prod) references Produto(id_prod);
 
 alter table Compra
-add foreign key (preco_variado) references Atividades(preco_variado);
+add foreign key (id_atividades) references Atividades(id_atividades);
 
 alter table Atividades
 add foreign key (id_cliente) references Cliente(id_cliente);
@@ -88,7 +88,7 @@ alter table Atividades
 add foreign key (id_endereco) references Endereco(id_endereco);
 
 alter table Produto
-add foreign key (preco_variado) references Atividades(preco_variado);
+add foreign key (id_atividades) references Atividades(id_atividades);
 
 ---Inserção de dados nas tabelas
 insert into Endereco (id_endereco, cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (811, 49065220, 'Rua Conego Serapiao Machado', 5, 'Bairro industrial', 'Aracaju', 'SE', 'Bra');
