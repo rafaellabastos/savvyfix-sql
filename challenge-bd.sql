@@ -28,7 +28,7 @@ create table Compra (
     valor_compra number(8,2) not null,
     especificacao_prod varchar(30) not null,
     id_endereco char(3), 
-    preco_variado number(8,2), 
+    id_atividades char(3), 
     id_cliente char(3), 
     id_prod char(3) 
 );
@@ -45,7 +45,8 @@ create table Endereco (
 ); 
 
 create table Atividades (
-    preco_variado number(8,2) primary key,
+    id_atividades char(3) primary key,
+    preco_variado number(8,2),
     horario_atual date,
     localizacao_atual varchar(50),
     clima_atual varchar(20),
@@ -61,7 +62,7 @@ create table Produto (
     desc_prod varchar(50) not null,
     marca_prod varchar(15) not null,
     preco_fixo number(8,2) not null,
-    preco_variado number(8,2)
+    id_atividades char(3)
 );
 
 ---Inserção das chaves estrangeiras
