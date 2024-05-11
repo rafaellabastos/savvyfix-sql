@@ -90,6 +90,22 @@ add foreign key (id_endereco) references Endereco(id_endereco);
 alter table Produto
 add foreign key (id_atividades) references Atividades(id_atividades);
 
+---Função para validar entrada de dados
+CREATE OR REPLACE FUNCTION ValidarSenha(senha_clie IN varchar2)
+RETURN NUMBER
+AS
+    valido NUMBER := 0;
+BEGIN
+    IF senha_clie IS NOT NULL AND LENGTH(senha_clie) BETWEEN 8 AND 50 AND
+       REGEXP_LIKE(senha_clie, '[0-9]') AND REGEXP_LIKE(senha_clie, '[A-Z]') AND REGEXP_LIKE(senha_clie, '[a-z]')
+    THEN 
+        valido := 1;
+    END IF;
+       
+    RETURN valido;
+END;
+/
+
 ---Inserção de dados nas tabelas
 insert into Endereco (id_endereco, cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (811, 49065220, 'Rua Conego Serapiao Machado', 5, 'Bairro industrial', 'Aracaju', 'SE', 'Bra');
 insert into Endereco (id_endereco, cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (734, 45208190, 'Rua acampamento velho', 10, 'Bairro Jequiezinho', 'Jequie', 'BA', 'Bra');
