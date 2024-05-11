@@ -218,3 +218,13 @@ BEGIN
     END LOOP;
 END;
 /
+
+---Procedure de insert
+CREATE OR REPLACE PROCEDURE InserirProduto
+(id_prod IN CHAR, nm_prod IN VARCHAR, desc_prod IN VARCHAR, marca_prod IN VARCHAR, preco_fixo IN NUMBER, id_atividades CHAR)
+AS
+BEGIN
+    INSERT INTO PRODUTO(id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, id_atividades)
+    VALUES(151, 'Tênis Casual', 'Para ser utilizado em diversas situações', 'Vizzano', 170.99, 830);
+END;
+/
