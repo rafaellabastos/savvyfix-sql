@@ -106,6 +106,22 @@ BEGIN
 END;
 /
 
+    
+CREATE OR REPLACE FUNCTION Vslidar_Cpf(cpf_clie IN varchar2)
+RETURN NUMBER
+AS
+    valido NUMBER := 0;
+BEGIN
+    IF cpf_clie IS NOT NULL AND LENGTH(cpf_clie) = 11 AND
+        REGEXP_LIKE(cpf_clie, '^\d{11}$')
+    THEN
+        valido := 1;
+    END IF;
+    
+    RETURN valido;
+END;
+/
+
 ---Inserção de dados nas tabelas
 insert into Endereco (id_endereco, cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (811, 49065220, 'Rua Conego Serapiao Machado', 5, 'Bairro industrial', 'Aracaju', 'SE', 'Bra');
 insert into Endereco (id_endereco, cep_endereco, rua_endereco, num_endereco, bairro_endereco, cidade_endereco, estado_endereco, pais) values (734, 45208190, 'Rua acampamento velho', 10, 'Bairro Jequiezinho', 'Jequie', 'BA', 'Bra');
