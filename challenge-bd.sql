@@ -228,3 +228,14 @@ BEGIN
     VALUES(151, 'Tênis Casual', 'Para ser utilizado em diversas situações', 'Vizzano', 170.99, 830);
 END;
 /
+
+---Procedure de delete
+CREATE OR REPLACE PROCEDURE ExcluirProduto
+(p_id_prod IN varchar2)
+IS
+BEGIN
+    DELETE FROM Produto p
+        WHERE p.id_prod = p_id_prod;
+    dbms_output.put_line('ID ' || p_id_prod || CASE WHEN sql%rowcount = 0 THEN ' não ' END || ' deletado');
+END;
+/
