@@ -107,7 +107,7 @@ END;
 /
 
     
-CREATE OR REPLACE FUNCTION Vslidar_Cpf(cpf_clie IN varchar2)
+CREATE OR REPLACE FUNCTION ValidarCpf(cpf_clie IN varchar2)
 RETURN NUMBER
 AS
     valido NUMBER := 0;
