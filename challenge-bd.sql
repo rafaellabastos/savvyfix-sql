@@ -236,17 +236,15 @@ IS
 BEGIN
     DELETE FROM Produto p
         WHERE p.id_prod = p_id_prod;
-
+    dbms_output.put_line('ID ' || p_id_prod || CASE WHEN sql%rowcount = 0 THEN ' não ' END || ' deletado');
+END;
+/
 
 ---Procedure para imprimir um relatório dos clientes que fizeram alguma compra no sistema
 SET SERVEROUTPUT ON;
 
 CREATE OR REPLACE PROCEDURE RelatorioCompras AS
-BEGIN
-    dbms_output.put_line('Relatório de Compras de Clientes');
-    dbms_output.put_line('---------------------------------');
-
-    FOR relat IN (
+    CURSOR c_relatorio IS
         SELECT 
             c.nm_clie AS NomeCliente,
             c.cpf_clie AS CPF,
@@ -261,21 +259,29 @@ BEGIN
         GROUP BY 
             c.nm_clie, c.cpf_clie
         ORDER BY 
-            SUM(comp.valor_compra) DESC
-    ) LOOP
-        dbms_output.put_line('Nome do cliente: ' || r.NomeCliente);
-        dbms_output.put_line('CPF: ' || r.CPF);
-        dbms_output.put_line('Total de compras: ' || r.TotalCompras);
-        dbms_output.put_line('Total gasto: ' || r.TotalGasto);
-        dbms_output.put_line('---------------------------------');
+            SUM(comp.valor_compra) DESC;
+    
+    r_relatorio c_relatorio%ROWTYPE;
+BEGIN
+    dbms_output.put_line('Relatório de Compras');
+    dbms_output.put_line('--------------------');
+
+    OPEN c_relatorio;
+    LOOP
+        FETCH c_relatorio INTO r_relatorio;
+        EXIT WHEN c_relatorio%NOTFOUND;
+
+        dbms_output.put_line('Nome do cliente: ' || r_relatorio.NomeCliente);
+        dbms_output.put_line('CPF: ' || r_relatorio.CPF);
+        dbms_output.put_line('Total de compras: ' || r_relatorio.TotalCompras);
+        dbms_output.put_line('Total gasto: ' || r_relatorio.TotalGasto);
+        dbms_output.put_line('--------------------');
     END LOOP;
+    CLOSE c_relatorio;
 END;
 /
 
 BEGIN
-    RelatorioComprasClientes;
-END;
-/
-    dbms_output.put_line('ID ' || p_id_prod || CASE WHEN sql%rowcount = 0 THEN ' não ' END || ' deletado');
+    RelatorioCompras;
 END;
 /
