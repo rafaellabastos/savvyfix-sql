@@ -236,6 +236,46 @@ IS
 BEGIN
     DELETE FROM Produto p
         WHERE p.id_prod = p_id_prod;
+
+
+---Procedure para imprimir um relatório dos clientes que fizeram alguma compra no sistema
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE PROCEDURE RelatorioCompras AS
+BEGIN
+    dbms_output.put_line('Relatório de Compras de Clientes');
+    dbms_output.put_line('---------------------------------');
+
+    FOR relat IN (
+        SELECT 
+            c.nm_clie AS NomeCliente,
+            c.cpf_clie AS CPF,
+            COUNT(comp.id_compra) AS TotalCompras,
+            SUM(comp.valor_compra) AS TotalGasto
+        FROM 
+            Cliente c
+        INNER JOIN 
+            Compra comp ON c.id_cliente = comp.id_cliente
+        WHERE 
+            comp.qntd_prod > 1
+        GROUP BY 
+            c.nm_clie, c.cpf_clie
+        ORDER BY 
+            SUM(comp.valor_compra) DESC
+    ) LOOP
+        dbms_output.put_line('Nome do cliente: ' || r.NomeCliente);
+        dbms_output.put_line('CPF: ' || r.CPF);
+        dbms_output.put_line('Total de compras: ' || r.TotalCompras);
+        dbms_output.put_line('Total gasto: ' || r.TotalGasto);
+        dbms_output.put_line('---------------------------------');
+    END LOOP;
+END;
+/
+
+BEGIN
+    RelatorioComprasClientes;
+END;
+/
     dbms_output.put_line('ID ' || p_id_prod || CASE WHEN sql%rowcount = 0 THEN ' não ' END || ' deletado');
 END;
 /
