@@ -90,7 +90,7 @@ add foreign key (id_endereco) references Endereco(id_endereco);
 alter table Produto
 add foreign key (id_atividades) references Atividades(id_atividades);
 
----Função para validar entrada de dados
+---Função 1 para validar entrada de dados
 CREATE OR REPLACE FUNCTION ValidarSenha(senha_clie IN varchar2)
 RETURN NUMBER
 AS
@@ -106,7 +106,7 @@ BEGIN
 END;
 /
 
-    
+---Função 2 para validar entrada de dados
 CREATE OR REPLACE FUNCTION ValidarCpf(cpf_clie IN varchar2)
 RETURN NUMBER
 AS
@@ -225,9 +225,27 @@ CREATE OR REPLACE PROCEDURE InserirProduto
 AS
 BEGIN
     INSERT INTO PRODUTO(id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, id_atividades)
-    VALUES(151, 'Tênis Casual', 'Para ser utilizado em diversas situações', 'Vizzano', 170.99, 830);
+    VALUES(id_prod, nm_prod, desc_prod, marca_prod, preco_fixo, id_atividades);
 END;
 /
+
+---Procedure de update
+CREATE OR REPLACE PROCEDURE AtualizarPrecosPorProcura 
+AS 
+BEGIN
+    UPDATE Produto p 
+    SET p.preco_fixo = p.preco_fixo * 1.1     
+    WHERE p.id_atividades IN (         
+        SELECT a.id_atividades         
+        FROM Atividades a         
+        WHERE a.qntd_procura > 10     
+    );     
+        DBMS_OUTPUT.PUT_LINE('Preços atualizados.'); 
+    EXCEPTION     
+        WHEN OTHERS THEN         
+        DBMS_OUTPUT.PUT_LINE('Erro ao atualizar os preços.'); 
+END; 
+/ 
 
 ---Procedure de delete
 CREATE OR REPLACE PROCEDURE ExcluirProduto
@@ -237,6 +255,29 @@ BEGIN
     DELETE FROM Produto p
         WHERE p.id_prod = p_id_prod;
     dbms_output.put_line('ID ' || p_id_prod || CASE WHEN sql%rowcount = 0 THEN ' não ' END || ' deletado');
+END;
+/
+
+---Procedure com cursor
+CREATE OR REPLACE PROCEDURE ListarClientesCompras 
+AS 
+BEGIN     
+    FOR rec IN (         
+        SELECT c.nm_clie, c.cpf_clie, com.nm_prod, com.qntd_prod, com.valor_compra         
+        FROM Cliente c         
+        JOIN Compra com ON c.id_cliente = com.id_cliente     
+    ) 
+    LOOP         
+        DBMS_OUTPUT.PUT_LINE('Cliente: ' || rec.nm_clie || ', CPF: ' || rec.cpf_clie || ', Produto: ' || rec.nm_prod || ', Quantidade: ' || rec.qntd_prod || ', Valor: ' || rec.valor_compra);    
+    END LOOP; 
+EXCEPTION     
+    WHEN OTHERS THEN         
+        DBMS_OUTPUT.PUT_LINE('Erro ao listar clientes e suas compras.'); 
+END; 
+/
+
+BEGIN
+    ListarClientesCompras;
 END;
 /
 
