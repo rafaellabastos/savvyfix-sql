@@ -1,3 +1,4 @@
+```sql
 -----Turma 2TDSPF
 ---Douglas Magalhães de Araujo - 552008
 ---Gustavo Argûello Bertacci - 551304
@@ -326,3 +327,4 @@ BEGIN
     RelatorioCompras;
 END;
 /
+```
