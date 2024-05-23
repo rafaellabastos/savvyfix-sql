@@ -5,7 +5,7 @@
 ---Rafaella Monique do Carmo Bastos - 552425
 
 
----Apagando as tabelas
+---Exclusão de tabelas
 drop table Cliente cascade constraints;
 drop table Compra cascade constraints;
 drop table Endereco cascade constraints;
