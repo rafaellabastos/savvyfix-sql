@@ -20,10 +20,10 @@
 
 ## Imagens dos diagramas
 ### Diagrama Entidade-Relacionamento
-loading
+![DER](https://github.com/rafaellabastos/savvyfix-sql/assets/85761347/6eabafb7-6598-4e9c-b7b4-5bdb1704d952)
 
 ### Modelo Entidade-Relacionamento
-loading
+![MER](https://github.com/rafaellabastos/savvyfix-sql/assets/85761347/a36d0f6b-a951-4f37-8c4f-4aa1ee3a62ce)
 
 ### Diagrama de Classes
 ![DiagramaClasses](https://github.com/LuizFFarias/challenge-java-savvyfix/assets/85761347/998723f8-4e88-400a-99ff-316a347103b9)
